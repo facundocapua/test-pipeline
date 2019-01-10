@@ -7,16 +7,13 @@ pipeline {
         BITBUCKET_TEAM = 'fcapuateam'
     }
 
+    parameters {
+        string(name:'SERVICE', defaultValue:'test_service', description:'The name of the service')
+        string(name:'COMPONENTS', defaultValue:'web|db|api', description:'The list of components')
+    }
+
     stages {
         stage('SCR') {
-            input {
-                message "Please provide the services parameters"
-                parameters {
-                    string(name:'SERVICE', defaultValue:'test_service', description:'The name of the service')
-                    string(name:'COMPONENTS', defaultValue:'web|db|api', description:'The list of components')
-                }
-            }
-
             stages{
                 stage('Project'){
                     steps {
