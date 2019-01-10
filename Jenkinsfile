@@ -23,7 +23,7 @@ pipeline {
 
                 stage('Repo'){
                     steps {
-                        sh "./create-repo.sh ${params.SERVICE} ${params.COMPONENTS}"
+                        sh "./create-repo.sh ${params.SERVICE} \"${params.COMPONENTS}\""
                     }
                 }
             } 
