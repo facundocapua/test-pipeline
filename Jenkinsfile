@@ -5,6 +5,8 @@ pipeline {
         BITBUCKET_USERNAME = credentials('BITBUCKET_USERNAME')
         BITBUCKET_PASSWORD = credentials('BITBUCKET_PASSWORD')
         BITBUCKET_TEAM = 'fcapuateam'
+        GIT_NAME = 'Facundo Capua'
+        GIT_EMAIL = 'fcapua@onica.com'
     }
 
     parameters {
