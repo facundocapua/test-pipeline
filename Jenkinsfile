@@ -7,15 +7,29 @@ pipeline {
         BITBUCKET_TEAM = 'fcapuateam'
     }
 
-    parameters {
-        string(name:'SERVICE', defaultValue:'test_service', description:'The name of the service')
-    }
-
     stages {
-        stage('Build') {
-            steps {
-                sh "./create-project.sh ${params.SERVICE}"
+        stage('SCR') {
+            input {
+                message "Please provide the services parameters"
+                parameters {
+                    string(name:'SERVICE', defaultValue:'test_service', description:'The name of the service')
+                    string(name:'COMPONENTS', defaultValue:'web|db|api', description:'The list of components')
+                }
             }
+
+            stages{
+                stage('Project'){
+                    steps {
+                        sh "./create-project.sh ${params.SERVICE}"
+                    }
+                }
+
+                stage('Repo'){
+                    steps {
+                        sh "./create-repo.sh ${params.SERVICE} ${params.COMPONENTS}"
+                    }
+                }
+            } 
         }
     }
 }
