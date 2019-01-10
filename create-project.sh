@@ -21,5 +21,7 @@ RESULT=$(curl -s -H "Content-Type: application/json" \
 if [ $(echo ${RESULT} | jq -r '.type') = "error" ]; then
     echo "There was an error creating the project"
     echo ${RESULT}
-    #exit 1
+    exit 1
 fi
+
+exit 0
