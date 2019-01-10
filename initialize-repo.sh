@@ -9,8 +9,15 @@ cd ${REPO_FOLDER}
 git config --global user.email GIT_NAME
 git config --global user.name GIT_EMAIL
 
-mkdir ./TF ./CMT ./LOG ./MON ./APP
-git commit -am "Initial Commit"
+FOLDERS=(TF CMT LOG MON APP)
+for FOLDER in ${FOLDERS[*]}
+do 
+    mkdir ./${FOLDER}
+    touch ./${FOLDER}/.gitkeep
+done
+
+git add .
+git commit -m "Initial Commit"
 git checkout -b develop
 git push origin --all
 
