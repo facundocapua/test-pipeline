@@ -1,9 +1,9 @@
-class dropDown
-{
-    def static newInst(name)
+import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition
+
+def dropdown(name)
     {
         def com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition test = 
-          new com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition(
+            new com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition(
             name,
             "PT_MULTI_SELECT",
             "web,api,dbe",  // displayed selection values
@@ -43,7 +43,7 @@ pipeline {
     parameters {
         string(name:'SERVICE', defaultValue:'test_service', description:'The name of the service')
         string(name:'COMPONENTS', defaultValue:'web|db|api', description:'The list of components')
-        dropDown.newInst('COMPONENTS_CHOICE')
+        dropdown('COMPONENTS_CHOICE')
     }
 
     stages {
