@@ -9,7 +9,7 @@ cd ${REPO_FOLDER}
 git config --global user.email GIT_NAME
 git config --global user.name GIT_EMAIL
 
-mkdir TF CMT LOG MON APP
+mkdir ./TF ./CMT ./LOG ./MON ./APP
 git commit -am "Initial Commit"
 git checkout -b develop
 git push origin --all
