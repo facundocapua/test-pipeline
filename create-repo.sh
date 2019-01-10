@@ -12,6 +12,8 @@ BODY=$(cat << EOF
 EOF
 )
 
+mkdir ./repo
+
 for i in $COMPONENTS
 do
     REPO_NAME="${SERVICE_NAME}_${i}"
@@ -24,13 +26,6 @@ do
 
     echo ${RESULT}
 
-    #Create develop branch
-    curl -X POST \
-        -H "Content-Type: application/x-www-form-urlencoded" \
-        -vv --user ${BITBUCKET_USERNAME}:${BITBUCKET_PASSWORD} \
-        "https://bitbucket.org/branch/create" \
-        -s -d 'repository=${BITBUCKET_TEAM}%2F${REPO_NAME}&from_branch=master&branch_name=develop'
-
-    
+    ./initialize-repo.sh ${REPO_NAME}
 done 
 exit 0
