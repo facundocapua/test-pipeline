@@ -87,22 +87,17 @@ pipeline {
     stages {
         stage('SCR') {
             stages{
-                stage('Test'){
-                    steps{
-                        sh "echo \"${params.COMPONENTS}\""
+                stage('Project'){
+                    steps {
+                        sh "./create-project.sh ${params.SERVICE}"
                     }
                 }
-                // stage('Project'){
-                //     steps {
-                //         sh "./create-project.sh ${params.SERVICE}"
-                //     }
-                // }
 
-                // stage('Repo'){
-                //     steps {
-                //         sh "./create-repo.sh ${params.SERVICE} \"${params.COMPONENTS}\""
-                //     }
-                // }
+                stage('Repo'){
+                    steps {
+                        sh "./create-repo.sh ${params.SERVICE} \"${params.COMPONENTS}\""
+                    }
+                }
             } 
         }
     }
