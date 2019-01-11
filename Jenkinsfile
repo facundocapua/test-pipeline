@@ -57,7 +57,7 @@ node
         false,
         false, 
         9999, 
-        "multiselect", 
+        "Select the components that are part of the service", 
         "|") 
 
     List params = []
