@@ -6,8 +6,8 @@ git clone https://${BITBUCKET_USERNAME}:${BITBUCKET_PASSWORD}@bitbucket.org/${BI
 
 cd ${REPO_FOLDER}
 
-git config --global user.email GIT_NAME
-git config --global user.name GIT_EMAIL
+git config user.email GIT_NAME
+git config user.name GIT_EMAIL
 
 FOLDERS=(TF CMT LOG MON APP)
 for FOLDER in ${FOLDERS[*]}
