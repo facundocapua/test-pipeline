@@ -1,37 +1,51 @@
+#!/usr/bin/env groovy
 import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition
 
-class dropDown
-{
-    def static newInst(name)
-    {
-        def com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition test = 
-          new com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition(
-            name,
-            "PT_MULTI_SELECT",
-            "A,B,C,D,E,F",  // displayed selection values
-            null,//project name
-            null,null,null,
-            null,// bindings
-            null,
-            null, // propertykey
-            "B", //default value
-            null,null,null,
-            null, //default bindings
-            null,null,
-            null, //descriptionPropertyValue
-            null,null,null,null,null,null,
-            null,// javascript file
-            null, // javascript
-            false, // save json param to file
-            false, // quote
-            5, // visible item count
-            null,
-            "," // separator
-        )
-        return test
-}
+def componentsChoice
 
-def componentsChoice = dropDown.newInst('COMPONENTS_CHOICE')
+node
+{
+    componentsChoice = new ExtendedChoiceParameterDefinition("COMPONENTS_CHOICE", 
+        "PT_CHECKBOX", 
+        "blue,green,yellow", 
+        "project name",
+        "", 
+        "",
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "BLUE,GREEN,YELLOW", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        false,
+        false, 
+        9999, 
+        "multiselect", 
+        "|") 
+
+    List params = []
+    List props = []
+
+    params << componentsChoice
+    //params << Inst2
+
+    props << parameters(params)
+    properties(props)
+}
 
 pipeline {
     agent any
@@ -47,7 +61,6 @@ pipeline {
     parameters {
         string(name:'SERVICE', defaultValue:'test_service', description:'The name of the service')
         string(name:'COMPONENTS', defaultValue:'web|db|api', description:'The list of components')
-        componentsChoice
     }
 
     stages {
@@ -55,7 +68,7 @@ pipeline {
             stages{
                 stage('Test'){
                     steps{
-                        sh "echo ${params.COMPONENTS_CHOICE}"
+                        sh "echo \"${params.COMPONENTS_CHOICE}\""
                     }
                 }
                 // stage('Project'){
