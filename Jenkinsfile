@@ -1,13 +1,36 @@
 #!/usr/bin/env groovy
 import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition
 
-def componentsChoice
+
 
 node
 {
-    componentsChoice = new ExtendedChoiceParameterDefinition("COMPONENTS_CHOICE", 
+    def componentsAvailable = [
+        'ADM':'adm',
+        'API':'api',
+        'APP':'app',
+        'DBE':'dbe',
+        'DOM':'dom',
+        'ETL':'etl',
+        'FIL':'fil',
+        'IDX':'idx',
+        'IOS':'ios',
+        'ISE':'ise',
+        'WEB':'web'
+    ]
+
+    def componentsChoice
+    List optionValues = []
+    List optionLabels = [] 
+
+    componentsAvailable.each{ k, v -> 
+        optionLabels << k
+        optionValues << v
+    }
+
+    componentsChoice = new ExtendedChoiceParameterDefinition("COMPONENTS", 
         "PT_CHECKBOX", 
-        "blue,green,yellow", 
+        optionValues.join(','), 
         "project name",
         "", 
         "",
@@ -22,7 +45,7 @@ node
         "", 
         "", 
         "", 
-        "BLUE,GREEN,YELLOW", 
+        optionLabels.join(','), 
         "", 
         "", 
         "", 
@@ -41,7 +64,6 @@ node
     List props = []
 
     params << componentsChoice
-    //params << Inst2
 
     props << parameters(params)
     properties(props)
@@ -60,7 +82,6 @@ pipeline {
 
     parameters {
         string(name:'SERVICE', defaultValue:'test_service', description:'The name of the service')
-        string(name:'COMPONENTS', defaultValue:'web|db|api', description:'The list of components')
     }
 
     stages {
@@ -68,7 +89,7 @@ pipeline {
             stages{
                 stage('Test'){
                     steps{
-                        sh "echo \"${params.COMPONENTS_CHOICE}\""
+                        sh "echo \"${params.COMPONENTS}\""
                     }
                 }
                 // stage('Project'){
