@@ -1,32 +1,42 @@
 #!/usr/bin/env groovy
 import com.cwctravel.hudson.plugins.extended_choice_parameter.ExtendedChoiceParameterDefinition
-
-
+import groovy.json.JsonSlurper
 
 node
 {
-    def componentsAvailable = [
-        'ADM':'adm',
-        'API':'api',
-        'APP':'app',
-        'DBE':'dbe',
-        'DOM':'dom',
-        'ETL':'etl',
-        'FIL':'fil',
-        'IDX':'idx',
-        'IOS':'ios',
-        'ISE':'ise',
-        'WEB':'web'
-    ]
-
-    def componentsChoice
+    def componentsUrl = "https://raw.githubusercontent.com/facundocapua/test-pipeline/master/components.json"          
+    def componentsObjectRaw = [
+        "curl", 
+        "-s", 
+        "-H", 
+        "accept: application/json", 
+        "-k", "--url", "${componentsUrl}"].execute().text
+    def jsonSlurper = new JsonSlurper()
+    def componentsJsonObject = jsonSlurper.parseText(componentsObjectRaw)
+    def dataArray = componentsJsonObject.data
     List optionValues = []
     List optionLabels = [] 
 
-    componentsAvailable.each{ k, v -> 
-        optionLabels << k
-        optionValues << v
-    }
+    for(item in dataArray){
+        optionLabels << item.name
+        optionValues << item.prefix
+    } 
+
+    // def componentsAvailable = [
+    //     'ADM':'adm',
+    //     'API':'api',
+    //     'APP':'app',
+    //     'DBE':'dbe',
+    //     'DOM':'dom',
+    //     'ETL':'etl',
+    //     'FIL':'fil',
+    //     'IDX':'idx',
+    //     'IOS':'ios',
+    //     'ISE':'ise',
+    //     'WEB':'web'
+    // ]
+
+    def componentsChoice
 
     componentsChoice = new ExtendedChoiceParameterDefinition("COMPONENTS", 
         "PT_CHECKBOX", 
