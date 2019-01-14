@@ -23,7 +23,7 @@ do
         -X POST \
         -d "${CREATE_REPO_REQUEST}" \
         --user ${BITBUCKET_USERNAME}:${BITBUCKET_PASSWORD} \
-        https://api.bitbucket.org/2.0/repositories/${BITBUCKET_TEAM}/${REPO_NAME} | jq .)
+        https://api.bitbucket.org/2.0/repositories/${BITBUCKET_TEAM}/${REPO_NAME})
 
     echo ${RESULT}
 
