@@ -2,7 +2,7 @@
 SERVICE_NAME=$1
 COMPONENTS=$(echo $2 | tr "|" "\n")
 
-HOOKS_REQUEST=$(cat << EOF
+CREATE_REPO_REQUEST=$(cat << EOF
 {
     "scm": "git",
     "project": {
@@ -23,7 +23,7 @@ do
         -X POST \
         -d "${CREATE_REPO_REQUEST}" \
         --user ${BITBUCKET_USERNAME}:${BITBUCKET_PASSWORD} \
-        https://api.bitbucket.org/2.0/repositories/${BITBUCKET_TEAM}/${REPO_NAME})
+        https://api.bitbucket.org/2.0/repositories/${BITBUCKET_TEAM}/${REPO_NAME} | jq .)
 
     echo ${RESULT}
 
