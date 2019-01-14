@@ -1,0 +1,46 @@
+[
+    {
+        "name": "ADM",
+        "prefix": "adm"
+    },
+    {
+        "name": "API",
+        "prefix": "api"
+    },
+    {
+        "name": "APP",
+        "prefix": "app"
+    },
+    {
+        "name": "DBE",
+        "prefix": "dbe"
+    },
+    {
+        "name": "DOM",
+        "prefix": "dom"
+    },    
+    {
+        "name": "ETL",
+        "prefix": "etl"
+    },
+    {
+        "name": "FIL",
+        "prefix": "fil"
+    },
+    {
+        "name": "IDX",
+        "prefix": "idx"
+    },
+    {
+        "name": "IOS",
+        "prefix": "ios"
+    },
+    {
+        "name": "ISE",
+        "prefix": "ise"
+    },    
+    {
+        "name": "WEB",
+        "prefix": "web"
+    }
+]
