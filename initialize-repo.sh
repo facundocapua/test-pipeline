@@ -4,6 +4,12 @@ REPO_FOLDER=./repo/${REPO_NAME}
 rm -rf ${REPO_FOLDER}
 git clone https://${BITBUCKET_USERNAME}:${BITBUCKET_PASSWORD}@bitbucket.org/${BITBUCKET_TEAM}/${REPO_NAME}.git ${REPO_FOLDER}
 
+if [[ ! -d ${REPO_FOLDER} ]]
+then
+    echo "The repository can not be cloned! Exiting now..."
+    exit 1
+fi
+
 cd ${REPO_FOLDER}
 
 git config user.email GIT_NAME
