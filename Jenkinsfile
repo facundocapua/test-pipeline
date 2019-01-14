@@ -21,20 +21,6 @@ node
         optionValues << item.prefix
     } 
 
-    // def componentsAvailable = [
-    //     'ADM':'adm',
-    //     'API':'api',
-    //     'APP':'app',
-    //     'DBE':'dbe',
-    //     'DOM':'dom',
-    //     'ETL':'etl',
-    //     'FIL':'fil',
-    //     'IDX':'idx',
-    //     'IOS':'ios',
-    //     'ISE':'ise',
-    //     'WEB':'web'
-    // ]
-
     def componentsChoice
 
     componentsChoice = new ExtendedChoiceParameterDefinition("COMPONENTS", 
@@ -87,6 +73,8 @@ pipeline {
         BITBUCKET_TEAM = 'fcapuateam'
         GIT_NAME = 'Facundo Capua'
         GIT_EMAIL = 'fcapua@onica.com'
+        IS_BITBUCKET_SERVER = 'false'
+        BITBUCKET_SERVER_URL = 'example.com'
     }
 
     parameters {
