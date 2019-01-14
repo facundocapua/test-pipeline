@@ -13,11 +13,10 @@ node
         "-k", "--url", "${componentsUrl}"].execute().text
     def jsonSlurper = new JsonSlurper()
     def componentsJsonObject = jsonSlurper.parseText(componentsObjectRaw)
-    def dataArray = componentsJsonObject.data
     List optionValues = []
     List optionLabels = [] 
 
-    for(item in dataArray){
+    for(item in componentsJsonObject){
         optionLabels << item.name
         optionValues << item.prefix
     } 
