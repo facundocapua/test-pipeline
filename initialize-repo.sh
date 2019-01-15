@@ -23,7 +23,7 @@ cd ${REPO_FOLDER}
 git config user.email GIT_NAME
 git config user.name GIT_EMAIL
 
-FOLDERS=(DEP CMT LMP MON APP)
+FOLDERS=(_DEP _LMP _MON)
 for FOLDER in ${FOLDERS[*]}
 do 
     mkdir ./${FOLDER}
