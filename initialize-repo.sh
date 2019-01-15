@@ -10,7 +10,7 @@ check_repo_status() {
     git ls-remote ${REPO} >/dev/null 2>/dev/null
     STATUS=$?
 
-    echo ${STATUS}
+    echo "Checking repo status..."
     return ${STATUS}
 }
 
@@ -23,13 +23,13 @@ fi
 
 rm -rf ${REPO_FOLDER}
 
-STATUS=$( check_repo_status ${NOT_WORKING_REPO} )
+STATUS=$( check_repo_status https://${BITBUCKET_USERNAME}:${BITBUCKET_PASSWORD}@${REPO_URL} )
 
 while [ ${STATUS} -ne 0 ] && [ $RETRIES -gt 0 ]
 do
     echo "Repository not found, retrying (${RETRIES})..."
     sleep 1
-    STATUS=$( check_repo_status ${WORKING_REPO} )
+    STATUS=$( check_repo_status https://${BITBUCKET_USERNAME}:${BITBUCKET_PASSWORD}@${REPO_URL} )
     RETRIES=$(( ${RETRIES} - 1 ))
 done
 
