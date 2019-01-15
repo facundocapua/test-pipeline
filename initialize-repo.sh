@@ -1,6 +1,18 @@
+#!/bin/bash
 REPO_NAME=$1
 SERVICE_NAME=$2
 REPO_FOLDER=./repo/${REPO_NAME}
+
+RETRIES=10
+
+check_repo_status() {
+    REPO=$1
+    git ls-remote ${REPO} >/dev/null 2>/dev/null
+    STATUS=$?
+
+    echo ${STATUS}
+    return ${STATUS}
+}
 
 if [[ "${IS_BITBUCKET_SERVER}" = "true" ]]
 then
@@ -10,6 +22,23 @@ else
 fi
 
 rm -rf ${REPO_FOLDER}
+
+STATUS=$( check_repo_status ${NOT_WORKING_REPO} )
+
+while [ ${STATUS} -ne 0 ] && [ $RETRIES -gt 0 ]
+do
+    echo "Repository not found, retrying (${RETRIES})..."
+    sleep 1
+    STATUS=$( check_repo_status ${WORKING_REPO} )
+    RETRIES=$(( ${RETRIES} - 1 ))
+done
+
+if [ ${STATUS} -ne 0 ]
+then
+    echo "Repository not found!"
+    exit 1
+fi
+
 git clone https://${BITBUCKET_USERNAME}:${BITBUCKET_PASSWORD}@${REPO_URL} ${REPO_FOLDER}
 
 if [[ ! -d ${REPO_FOLDER} ]]

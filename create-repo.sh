@@ -41,8 +41,6 @@ EOF
 
     echo ${RESULT}
 
-    sleep 2
-    
     ./initialize-repo.sh ${REPO_NAME} ${SERVICE_NAME}
 done 
 exit 0
