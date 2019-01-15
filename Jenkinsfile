@@ -78,7 +78,8 @@ pipeline {
     }
 
     parameters {
-        string(name:'SERVICE', defaultValue:'test_service', description:'The name of the service')
+        string(name:'SERVICE_NAME', defaultValue:'test_service', description:'The name of the service')
+        string(name:'SERVICE_KEY', defaultValue:'test_service', description:'The name of the service')
     }
 
     stages {
@@ -86,13 +87,13 @@ pipeline {
             stages{
                 stage('Project'){
                     steps {
-                        sh "./create-project.sh ${params.SERVICE}"
+                        sh "./create-project.sh ${params.SERVICE_NAME} ${params.SERVICE_KEY}"
                     }
                 }
 
                 stage('Repo'){
                     steps {
-                        sh "./create-repo.sh ${params.SERVICE} \"${params.COMPONENTS}\""
+                        sh "./create-repo.sh ${params.SERVICE_KEY} \"${params.COMPONENTS}\""
                     }
                 }
             } 

@@ -1,12 +1,13 @@
 #!/bin/bash
 SERVICE_NAME=$1
+SERVICE_KEY=$2
 
 # Create project
 BODY=$(cat << EOF
 {
     "name": "${SERVICE_NAME}",
-    "key": "${SERVICE_NAME}",
-    "description": "A test service",
+    "key": "${SERVICE_KEY}",
+    "description": "${SERVICE_NAME}",
     "is_private": false
 }
 EOF
