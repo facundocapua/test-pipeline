@@ -4,7 +4,7 @@ REPO_FOLDER=./repo/${REPO_NAME}
 
 if [[ "${IS_BITBUCKET_SERVER}" = "true" ]]
 then
-    REPO_URL=ources.devel.redbull.com/scm/${SERVICE_NAME}/${REPO_NAME}.git
+    REPO_URL=sources.devel.redbull.com/scm/${SERVICE_NAME}/${REPO_NAME}.git
 else
     REPO_URL=bitbucket.org/${BITBUCKET_TEAM}/${REPO_NAME}.git
 fi
