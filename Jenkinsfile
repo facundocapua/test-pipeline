@@ -87,7 +87,7 @@ pipeline {
                 stage('Project'){
                     steps {
                         script {
-                            env.SERVICE_KEY=params.SERVICE_NAME.toLowerCase().replaceAll("/[^A-Za-z0-9_]/", "")
+                            env.SERVICE_KEY=params.SERVICE_NAME.toLowerCase().replaceAll(/[^A-Za-z0-9_]/, "_")
                         }
                         
                         sh "./create-project.sh ${params.SERVICE_NAME} ${env.SERVICE_KEY}"
