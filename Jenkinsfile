@@ -78,7 +78,7 @@ pipeline {
     }
 
     parameters {
-        string(name:'SERVICE_NAME', defaultValue:'test_service', description:'The name of the service')
+        string(name:'SERVICE_NAME', defaultValue:'RBNA.WingTips', description:'This is the name of the BitBucket Project. Project name should begin with organization (ex. RBNA), followed by a period, and Service Name (ex. WingTips). Project Name Example: “RBNA.WingTips”')
     }
 
     stages {
